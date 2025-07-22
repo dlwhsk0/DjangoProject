@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Board
+from .models import Comment
 
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,3 +11,8 @@ class BoardCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
         fields = ['title', 'content']
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['id', 'board', 'author', 'content', 'created_at', 'updated_at']
