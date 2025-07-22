@@ -1,8 +1,13 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
 
 from . import views
+from .views import CommentViewSet
 
 app_name = 'board' # create 등의 이름이 겹칠 수 있으니까 별칭 지정
+
+router = DefaultRouter()
+router.register(r'comments', CommentViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -11,3 +16,4 @@ urlpatterns = [
     path('delete/<int:board_id>/', views.board_delete, name='board_delete'),
     path('update/<int:board_id>/', views.board_update, name='board_update'),
 ]
+urlpatterns += router.urls
