@@ -1,17 +1,27 @@
+<form method="get" action="">
+	<input
+		type="text"
+		name="q"
+		placeholder="검색어를 입력하세요"
+		value="{{ query|default:'' }}"
+	/>
+	<button type="submit">검색</button>
+</form>
+<hr />
 {% if board_list %}
-    <ul>
-    {% for board in board_list %}
-        <li><a href="{% url 'board:detail' board.id %}">{{ board.title }}</a></li>
-    {% endfor %}
-    </ul>
+<ul>
+	{% for board in board_list %}
+	<li><a href="{% url 'board:detail' board.id %}">{{ board.title }}</a></li>
+	{% endfor %}
+</ul>
 {% else %}
-    <h2>게시글이 없습니다.</h2>
+<h2>게시글이 없습니다.</h2>
 {% endif %}
 <form action="{% url 'board:board_create' %}" method="post">
-{% csrf_token %}
-    <label for="title">제목:</label>
-    <input type="text" name="title" id="title"/>
-    <label for="content">내용:</label>
-    <textarea name="content" id="content" rows="15"></textarea>
-    <input type="submit" value="등록">
+	{% csrf_token %}
+	<label for="title">제목:</label>
+	<input type="text" name="title" id="title" />
+	<label for="content">내용:</label>
+	<textarea name="content" id="content" rows="15"></textarea>
+	<input type="submit" value="등록" />
 </form>
