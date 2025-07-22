@@ -13,3 +13,10 @@ class Like(models.Model):
 
     def __str__(self):
         return f"Like for {self.board_id} at {self.created_at}"
+
+class CommentLike(models.Model):
+    comment = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name='likes')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Like for comment {self.comment_id} at {self.created_at}"
