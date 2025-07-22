@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Board
+from .models import Like
 
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,3 +11,8 @@ class BoardCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
         fields = ['title', 'content']
+
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = ['id', 'board', 'created_at']

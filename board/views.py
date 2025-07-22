@@ -3,9 +3,12 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
+from rest_framework import viewsets
 
 from board.models import Board
 from board.serializers import BoardSerializer
+from .models import Like
+from .serializers import LikeSerializer
 
 def index(request):
     board_list = Board.objects.order_by('-created_at') # 역순, 최신순 정렬
@@ -49,3 +52,7 @@ def board_delete(request, board_id):
     board = get_object_or_404(Board, id=board_id)
     board.delete()
     return redirect('board:index')
+
+class LikeViewSet(viewsets.ModelViewSet):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
