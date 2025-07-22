@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 from .views import LikeViewSet
+from .views import CommentLikeViewSet
 from rest_framework.routers import DefaultRouter
 
 app_name = 'board' # create 등의 이름이 겹칠 수 있으니까 별칭 지정
@@ -16,3 +17,4 @@ urlpatterns = [
 
 router = DefaultRouter()
 router.register(r'likes', LikeViewSet)
+router.register(r'comment-likes', CommentLikeViewSet)

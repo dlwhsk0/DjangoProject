@@ -9,6 +9,8 @@ from board.models import Board
 from board.serializers import BoardSerializer
 from .models import Like
 from .serializers import LikeSerializer
+from .models import CommentLike
+from .serializers import CommentLikeSerializer
 
 def index(request):
     board_list = Board.objects.order_by('-created_at') # 역순, 최신순 정렬
@@ -56,3 +58,7 @@ def board_delete(request, board_id):
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
+
+class CommentLikeViewSet(viewsets.ModelViewSet):
+    queryset = CommentLike.objects.all()
+    serializer_class = CommentLikeSerializer
