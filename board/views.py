@@ -3,9 +3,12 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
+from rest_framework import viewsets, filters
 
 from board.models import Board
 from board.serializers import BoardSerializer
+from .models import Comment
+from .serializers import CommentSerializer
 
 def index(request):
     board_list = Board.objects.order_by('-created_at') # 역순, 최신순 정렬
@@ -49,3 +52,9 @@ def board_delete(request, board_id):
     board = get_object_or_404(Board, id=board_id)
     board.delete()
     return redirect('board:index')
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['content', 'author']
